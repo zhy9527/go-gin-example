@@ -3,7 +3,6 @@ module go-gin-example
 go 1.14
 
 require (
-	github.com/EDDYCJY/go-gin-example v0.0.0-20200505102242-63963976dee0
 	github.com/astaxie/beego v1.12.1
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.6.3
@@ -13,7 +12,7 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/unknwon/com v1.0.1
-	golang.org/x/sys v0.0.0-20200515095857-1151b9dac4a9 // indirect
+	golang.org/x/sys v0.0.0-20200523222454-059865788121 // indirect
 	gopkg.in/ini.v1 v1.56.0 // indirect
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 )

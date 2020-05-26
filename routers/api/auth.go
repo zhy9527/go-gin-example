@@ -54,3 +54,36 @@ func GetAuth(c *gin.Context) {
 		"data": data,
 	})
 }
+
+func PostRegister(c *gin.Context) {
+	username := c.Query("username")
+	password := c.Query("password")
+	createdBy := c.Query("created_by")
+
+	valid := validation.Validation{}
+	valid.Required(username, "username").Message("用户名不能为空")
+	valid.Required(password, "password").Message("密码不能为空")
+
+	code := e.INVALID_PARAMS
+	data := make(map[string]interface{})
+	if !valid.HasErrors() {
+		if !models.ExistAuthByUsername(username) {
+			code = e.SUCCESS
+			models.AddAuth(username, password, createdBy)
+			token, err := util.GenerateToken(username, password)
+			if err != nil {
+				code = e.ERROR_AUTH_TOKEN
+			} else {
+				data["token"] = token
+			}
+		} else {
+			code = e.ERROR_EXIST_USERNAME
+		}
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"code": code,
+		"msg":  e.GetMsg(code),
+		"data": data,
+	})
+}
