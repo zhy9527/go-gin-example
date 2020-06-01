@@ -27,7 +27,7 @@ func CheckAuth(username, password string) bool {
 
 func ExistAuthByUsername(username string) bool {
 	var auth Auth
-	db.Select("id").Where("username = ?", username).First(&auth)
+	db.Where("username = ?", username).First(&auth)
 	if auth.ID > 0 {
 		return true
 	}

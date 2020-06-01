@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/astaxie/beego/validation"
@@ -59,7 +60,8 @@ func PostRegister(c *gin.Context) {
 	username := c.Query("username")
 	password := c.Query("password")
 	createdBy := c.Query("created_by")
-
+	fmt.Println(username)
+	fmt.Println(password)
 	valid := validation.Validation{}
 	valid.Required(username, "username").Message("用户名不能为空")
 	valid.Required(password, "password").Message("密码不能为空")
