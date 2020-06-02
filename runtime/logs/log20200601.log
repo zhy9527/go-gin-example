@@ -17,3 +17,5 @@
 [INFO][auth.go:49]2020/06/01 22:56:26 [Username.Required. Can not be empty]
 [INFO][auth.go:49]2020/06/01 22:56:26 [Password.Required. Can not be empty]
 [INFO][auth.go:49]2020/06/01 22:56:26 [username 用户名不能为空]
+[INFO][auth.go:48]2020/06/01 22:57:36 [Username.Required. Can not be empty]
+[INFO][auth.go:48]2020/06/01 22:57:36 [Password.Required. Can not be empty]
