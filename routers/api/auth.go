@@ -12,9 +12,9 @@ import (
 	"go-gin-example/pkg/util"
 )
 
-type auth struct {
-	Username string `valid:"Required; MaxSize(50)"`
-	Password string `valid:"Required; MaxSize(50)"`
+type Auth struct {
+	username string `valid:"Required; MaxSize(50)"`
+	password string `valid:"Required; MaxSize(50)"`
 }
 
 func GetAuth(c *gin.Context) {
@@ -22,7 +22,7 @@ func GetAuth(c *gin.Context) {
 	password := c.Query("password")
 
 	valid := validation.Validation{}
-	a := auth{Username: username, Password: password}
+	a := Auth{username: username, password: password}
 	ok, _ := valid.Valid(&a)
 
 	data := make(map[string]interface{})
@@ -56,34 +56,36 @@ func GetAuth(c *gin.Context) {
 }
 
 func PostRegister(c *gin.Context) {
-	var userinfo auth
-	if err := c.BindJSON(&userinfo) err != nil {
-		return
-	}
+	username := c.PostForm("username")
+	password := c.PostForm("password")
 	valid := validation.Validation{}
-	valid.Required(userinfo.username, "username").Message("用户名不能为空")
-	valid.Required(userinfo.password, "password").Message("密码不能为空")
+	valid.Required(username, "username").Message("用户名不能为空")
+	valid.Required(password, "password").Message("密码不能为空")
 
-	// code := e.INVALID_PARAMS
-	// data := make(map[string]interface{})
-	// if !valid.HasErrors() {
-	// 	if !models.ExistAuthByUsername(username) {
-	// 		code = e.SUCCESS
-	// 		models.AddAuth(username, password, createdBy)
-	// 		token, err := util.GenerateToken(username, password)
-	// 		if err != nil {
-	// 			code = e.ERROR_AUTH_TOKEN
-	// 		} else {
-	// 			data["token"] = token
-	// 		}
-	// 	} else {
-	// 		code = e.ERROR_EXIST_USERNAME
-	// 	}
-	// }
+	code := e.INVALID_PARAMS
+	data := make(map[string]interface{})
+	if !valid.HasErrors() {
+		if !models.ExistAuthByUsername(username) {
+			code = e.SUCCESS
+			models.AddAuth(username, password)
+			token, err := util.GenerateToken(username, password)
+			if err != nil {
+				code = e.ERROR_AUTH_TOKEN
+			} else {
+				data["token"] = token
+			}
+		} else {
+			code = e.ERROR_EXIST_USERNAME
+		}
+	} else {
+		// for _, err := range valid.Errors {
+		// 	code = err.Message
+		// }
+	}
 
 	c.JSON(http.StatusOK, gin.H{
-		// "code": code,
-		// "msg":  e.GetMsg(code),
-		"data": userinfo,
+		"code": code,
+		"msg":  e.GetMsg(code),
+		"data": data,
 	})
 }

@@ -19,6 +19,7 @@ func InitRouter() *gin.Engine {
 	gin.SetMode(setting.RunMode)
 	// 注册
 	r.POST("/register", api.PostRegister)
+
 	// 登录
 	r.GET("/auth", api.GetAuth)
 	apiv1 := r.Group("/api/v1")

@@ -1,0 +1,4 @@
+[INFO][auth.go:47]2020/06/06 12:06:25 [Username.Required. Can not be empty]
+[INFO][auth.go:47]2020/06/06 12:06:37 [Username.Required. Can not be empty]
+[INFO][auth.go:112]2020/06/06 12:22:28 [err.Key err.Message]
+[INFO][auth.go:112]2020/06/06 12:22:34 [err.Key err.Message]

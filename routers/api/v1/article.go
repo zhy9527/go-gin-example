@@ -87,12 +87,12 @@ func GetArticles(c *gin.Context) {
 
 //新增文章
 func AddArticle(c *gin.Context) {
-	tagId := com.StrTo(c.Query("tag_id")).MustInt()
-	title := c.Query("title")
-	desc := c.Query("desc")
-	content := c.Query("content")
-	createdBy := c.Query("created_by")
-	state := com.StrTo(c.DefaultQuery("state", "0")).MustInt()
+	tagId := com.StrTo(c.PostForm("tag_id")).MustInt()
+	title := c.PostForm("title")
+	desc := c.PostForm("desc")
+	content := c.PostForm("content")
+	createdBy := c.PostForm("created_by")
+	state := com.StrTo(c.DefaultPostForm("state", "0")).MustInt()
 
 	valid := validation.Validation{}
 	valid.Min(tagId, 1, "tag_id").Message("标签ID必须大于0")

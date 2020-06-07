@@ -35,11 +35,10 @@ func ExistAuthByUsername(username string) bool {
 	return false
 }
 
-func AddAuth(username string, password string, created_by string) bool {
+func AddAuth(username string, password string) bool {
 	db.Create(&Auth{
-		Username:  username,
-		Password:  password,
-		CreatedBy: created_by,
+		Username: username,
+		Password: password,
 	})
 
 	return true
